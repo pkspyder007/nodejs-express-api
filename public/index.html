@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movies</title>
+  </head>
+  <body>
+    <h1>All Movies</h1>
+    <div id="movies"></div>
+
+    <script>
+      let movies = [];
+      async function getAll(url) {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+      }
+
+      function createMovies(moviesList) {
+        const moviesDiv = document.querySelector("#movies");
+        moviesList.forEach((movie) => {
+          let div = document.createElement("div");
+
+          div.innerHTML = `
+                <h3>Name: ${movie.title}<h3>
+                <h3>Director: <a href="/director/#${movie.director._id}">${movie.director.name}</a><h3>
+                <h3>Rating: ${movie.rating}<h3>
+                    <h2>Artists: </h2>
+                <h3>${movie.artists.map((artist) => `  <a href="/actor/#${artist._id}">${artist.name}</a>`)}</h3>
+            `;
+                    moviesDiv.appendChild(div);
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        movies = await getAll(`/movie/all`);
+        createMovies(movies)
+      });
+    </script>
+  </body>
+</html>

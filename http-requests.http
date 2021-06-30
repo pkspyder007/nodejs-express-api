@@ -1,0 +1,49 @@
+### Actor
+GET http://localhost:5000/actor/60d43f515c51d71074af8394 HTTP/1.1
+
+###
+POST http://localhost:5000/actor/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Bad man",
+    "movies": []
+}
+
+### Director
+GET http://localhost:5000/director/60d4404e11282e32ecdbe765 HTTP/1.1
+
+###
+POST http://localhost:5000/director/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Best BEst Director",
+    "movies": []
+}
+
+### Movie
+GET http://localhost:5000/movie/all HTTP/1.1
+
+###
+# 60d44313e430d11620a38811 - 1st movies
+GET http://localhost:5000/movie/60d4435ce430d11620a38817 HTTP/1.1
+
+###
+
+# title The Unreleased movie
+# rating 7 
+# director 60d4404e11282e32ecdbe765
+# artists [60d43f9af28228044c8e944b,60d43f515c51d71074af8394]
+
+POST http://localhost:5000/movie/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Special 26",
+    "rating": 6,
+    "artists": ["60d43f515c51d71074af8394"],
+    "director": "60d4433de430d11620a38813"
+}
+
+

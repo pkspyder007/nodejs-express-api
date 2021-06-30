@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Director</title>
+  </head>
+  <body>
+    <h1>Director Info</h1>
+    <div id="actor"></div>
+
+    <script>
+      let actor = {};
+      async function getAll(url) {
+        const res = await fetch(url);
+        const data = await res.json();
+        return data;
+      }
+
+      function createactor(actor) {
+        const actorDiv = document.querySelector("#actor");
+          let div = document.createElement("div");
+          div.innerHTML = `
+                <h3>Name: ${actor.name}<h3>
+                    <h2> Movies </h2>
+                <h3>${actor.movies.map((movie) => ` ${movie.title}`)}</h3>
+            `;
+                    actorDiv.appendChild(div);
+      }
+
+      document.addEventListener("DOMContentLoaded", async () => {
+        const id = window.location.hash.split("#")[1]
+        actor = await getAll(`/director/${id}`);
+        createactor(actor)
+        
+      });
+    </script>
+  </body>
+</html>
